@@ -2,7 +2,7 @@ module Rkilly
   require 'rubygems'
   require 'commander/import'
 
-  program :version, '0.0.1'
+  program :version, '0.0.2'
   program :description, 'Easily kill processes'
  
   command :kill do |c|
@@ -11,7 +11,7 @@ module Rkilly
     c.description = 'Finds all processes that match [process name] and allows you to kill any specific match or all matches.'
     c.action do |args, options|
       pname = args[0]
-      data_array = %x(ps aux | grep #{pname} | grep -v grep | awk '{print $2, $11, $12, $13}').split("\n").drop(1)
+      data_array = %x(ps aux | grep -i #{pname} | grep -v grep | awk '{print $2, $11, $12, $13}').split("\n").drop(1)
     
       container_array = []
       data_array.each do |cols|
